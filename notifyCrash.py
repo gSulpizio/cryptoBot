@@ -5,7 +5,7 @@ import sys
 
 print('enter pid:\n')
 pid = int(sys.argv[1])
-os.waitpid(pid)
+os.waitpid(pid, 0)
 
 
 MSG = 'BOT CRASHED OR WAS SHUT OFF'
