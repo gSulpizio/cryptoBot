@@ -33,7 +33,7 @@ bprice = 0
 # print('enter amount of days')
 # n_prov=float(input())*24
 
-symbol = 'STORJUSDT'
+symbol = 'DOGEUSDT'
 
 # initialisation:
 
@@ -49,13 +49,13 @@ for i in range(0, 500):
 df = df.sort_index(axis=0, ascending=True)
 
 balanceUSDT = client.get_asset_balance(asset='USDT')
-balanceSTORJ = client.get_asset_balance(asset='STORJ')
+balanceDOGE = client.get_asset_balance(asset='DOGE')
 balanceUSDT = float(balanceUSDT['free'])
-balanceSTORJ = float(balanceSTORJ['free'])
-money_fix = balanceSTORJ + balanceUSDT 
+balanceDOGE = float(balanceDOGE['free'])
+money_fix = balanceDOGE + balanceUSDT 
 
 df['amt_USDT'] = np.nan
-df['amt_STORJ'] = np.nan
+df['amt_DOGE'] = np.nan
 
 
 # SMA:
@@ -67,9 +67,9 @@ df['SMA90'] = SMA_hist
 
 n = len(df)
 
-MSG = (f"Initiating trading {symbol} 24h using EMA")
+MSG = (f"Initiating trading {symbol} 1h using EMA")
 psh.push(MSG)
-
+w=1
 tm.sleep(w)
 
 
@@ -77,7 +77,7 @@ tm.sleep(w)
 while True == True:
     top_row = pd.DataFrame(
         {'price': [np.nan], 'amt_USDT': [np.nan],
-         'amt_STORJ': [np.nan], 'SMA30': [np.nan], 'SMA90': [np.nan]})
+         'amt_DOGE': [np.nan], 'SMA30': [np.nan], 'SMA90': [np.nan]})
     df = pd.concat([df, top_row]).reset_index(drop=True)
     df['price'][n] = dg.xgrab_live_v2(symbol)  # adding a row
 # SMA
@@ -87,33 +87,33 @@ while True == True:
     df['SMA90'] = SMA_hist
 
     balanceUSDT = client.get_asset_balance(asset='USDT')
-    balanceSTORJ = client.get_asset_balance(asset='STORJ')
+    balanceDOGE = client.get_asset_balance(asset='DOGE')
     balanceUSDT = float(balanceUSDT['free'])
-    balanceSTORJ = float(balanceSTORJ['free'])
+    balanceDOGE = float(balanceDOGE['free'])
 
-    balanceUSDT = balanceUSDT / df['price'][n]  # converting to STORJ
+    balanceUSDT = balanceUSDT / df['price'][n]  # converting to DOGE
 
-    amt_STORJ = balanceSTORJ * 0.99
-    amt_USDT = balanceUSDT * 0.99  # it's in STORJ
+    amt_DOGE = balanceDOGE * 0.99
+    amt_USDT = balanceUSDT * 0.99  # it's in DOGE
 
     if not (act == 0):
         act = act - 1
-    if amt_USDT >= amt_STORJ:
-        if CustomFunctions.buy_conditions_SMA(df, n) == True:  # buy STORJ
+    if amt_USDT >= amt_DOGE:
+        if CustomFunctions.buy_conditions_SMA(df, n) == True:  # buy DOGE
             client.order_market_buy(symbol=symbol, quantity=round(amt_USDT, 6))
-            rt = (balanceUSDT + balanceSTORJ) / money_fix * 100
+            rt = (balanceUSDT + balanceDOGE) / money_fix * 100
             MSG = (
                 f"BUY, price: {df['price'][n]},return: {rt} '% @:',{dt.datetime.now()}")
             psh.push(MSG)
             act = 2
             bprice = df['price'][n]
 
-    if amt_STORJ >= amt_USDT:  # if we activate the if above, transform if to elif
+    if amt_DOGE >= amt_USDT:  # if we activate the if above, transform if to elif
         # Did SMA get smaller than closing price?
-        if CustomFunctions.sell_conditions_SMA(df, n) == True:  # sell STORJ
+        if CustomFunctions.sell_conditions_SMA(df, n) == True:  # sell DOGE
             client.order_market(symbol=symbol, side='SELL',
-                                quantity=round(amt_STORJ, 6))
-            rt = (balanceUSDT + balanceSTORJ) / money_fix * 100
+                                quantity=round(amt_DOGE, 6))
+            rt = (balanceUSDT + balanceDOGE) / money_fix * 100
             MSG = (
                 f"SELL, price: {df['price'][n]},return: {rt} '% @:',{dt.datetime.now()}")
             psh.push(MSG)
@@ -123,7 +123,7 @@ while True == True:
                 act = 2
 
     df['amt_USDT'][n] = amt_USDT
-    df['amt_STORJ'][n] = amt_STORJ
+    df['amt_DOGE'][n] = amt_DOGE
 
     n += 1
     tm.sleep(w)
