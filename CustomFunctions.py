@@ -364,26 +364,6 @@ def RSI_SMMA(df, n, colprice, rad):  # with simple moving avg. for EMA, change a
 
 
 def buy_conditions_RSI_stoch(df, n):
-    RSI = df.iloc[n, 12]
-    STOCH = df.iloc[n, 16]
-    if RSI < 30 and STOCH < 20:
-        return True
-    else:
-        return False
-
-
-def sell_conditions_RSI_stoch(df, n, stp):
-    RSI = df.iloc[n, 12]
-    STOCH = df.iloc[n, 16]
-    if RSI > 70 and STOCH > 80:
-        return True
-    # if df.iloc[n,4]<stp:
-    #    return True
-    else:
-        return False
-
-
-def buy_conditions_RSI_stoch(df, n):
     RSI = df.iloc[n, 1]
     STOCH = df.iloc[n, 5]
     if RSI < 30 and STOCH < 20:
@@ -420,6 +400,27 @@ def sell_conditions_EMA_f(df, n):
     EMA21 = df.iloc[n, 5]
     EMA55 = df.iloc[n, 6]
     if not (EMA8 > EMA13 and EMA13 > EMA21 and EMA21 > EMA55):
+        return True
+    else:
+        return False
+
+def buy_conditions_SMA(df, n):
+    SMA30 = df['SMA30'][n]
+    SMA90 = df['SMA90'][n]
+    pSMA30 = df['SMA30'][n-1]
+    pSMA90 = df['SMA90'][n-1]
+    if SMA30>SMA90 and pSMA30<pSMA90:
+        return True
+    else:
+        return False
+
+
+def sell_conditions_SMA(df, n):
+    SMA30 = df['SMA30'][n]
+    SMA90 = df['SMA90'][n]
+    pSMA30 = df['SMA30'][n-1]
+    pSMA90 = df['SMA90'][n-1]
+    if SMA30<SMA90 and pSMA30>pSMA90:
         return True
     else:
         return False
