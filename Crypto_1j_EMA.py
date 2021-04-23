@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt  # for charts and such
 import time as tm
 import data_grab as dg
 import BinanceKeys as BKeys
-import ccxt
+#import ccxt
 import Push_notification as psh
 #import pickle
 import os.path
@@ -26,14 +26,14 @@ rad_2nd_avg = 2
 trade_margin = 0.01
 fee = 0.001
 act = 1
-w = 60*60*24  # change back to 1 H, 3s is for testing
+w = 60*60  # change back to 1 H, 3s is for testing
 x = 0.001
 bprice = 0
 
 # print('enter amount of days')
 # n_prov=float(input())*24
 
-symbol = 'BTCUSDT'
+symbol = 'BNBUSDT'
 
 # initialisation:
 
@@ -49,30 +49,25 @@ for i in range(0, 500):
 df = df.sort_index(axis=0, ascending=True)
 
 balanceUSDT = client.get_asset_balance(asset='USDT')
-balanceBTC = client.get_asset_balance(asset='BTC')
+balanceBNB = client.get_asset_balance(asset='BNB')
 balanceUSDT = float(balanceUSDT['free'])
-balanceBTC = float(balanceBTC['free'])
-money_fix = balanceBTC + balanceUSDT / df.iloc[0, 0]
+balanceBNB = float(balanceBNB['free'])
+money_fix = balanceBNB + balanceUSDT 
 
 df['amt_USDT'] = np.nan
-df['amt_BTC'] = np.nan
+df['amt_BNB'] = np.nan
 
 
-# EMA:
+# SMA:
 
-EMA_hist = df.iloc[:, 0].ewm(span=8, adjust=False).mean()
-df['EMA8'] = EMA_hist
-EMA_hist = df.iloc[:, 0].ewm(span=13, adjust=False).mean()
-df['EMA13'] = EMA_hist
-EMA_hist = df.iloc[:, 0].ewm(span=21, adjust=False).mean()
-df['EMA21'] = EMA_hist
-EMA_hist = df.iloc[:, 0].ewm(span=55, adjust=False).mean()
-df['EMA55'] = EMA_hist
-
+SMA_hist = df.iloc[:, 0].rolling(30).mean()
+df['SMA30'] = SMA_hist
+SMA_hist = df.iloc[:, 0].rolling(90).mean()
+df['SMA90'] = SMA_hist
 
 n = len(df)
 
-MSG = (f"Initiating trading {symbol} 24h using EMA")
+MSG = (f"Initiating trading {symbol} 1h using EMA")
 psh.push(MSG)
 
 tm.sleep(w)
@@ -81,58 +76,55 @@ tm.sleep(w)
 # loop:
 while True == True:
     top_row = pd.DataFrame(
-        {'price': [np.nan], 'RSI': [np.nan], 'amt_USDT': [np.nan],
-         'amt_BTC': [np.nan], 'EMA8': [np.nan], 'EMA13': [np.nan], 'EMA21': [np.nan], 'EMA55': [np.nan]})
+        {'price': [np.nan], 'amt_USDT': [np.nan],
+         'amt_BNB': [np.nan], 'SMA30': [np.nan], 'SMA90': [np.nan]})
     df = pd.concat([df, top_row]).reset_index(drop=True)
-    df.iloc[n, 0] = dg.xgrab_live_v2(symbol)  # adding a row
-# EMA
-    EMA_hist = df.iloc[:, 0].ewm(span=8, adjust=False).mean()
-    df['EMA8'] = EMA_hist
-    EMA_hist = df.iloc[:, 0].ewm(span=13, adjust=False).mean()
-    df['EMA13'] = EMA_hist
-    EMA_hist = df.iloc[:, 0].ewm(span=21, adjust=False).mean()
-    df['EMA21'] = EMA_hist
-    EMA_hist = df.iloc[:, 0].ewm(span=55, adjust=False).mean()
-    df['EMA55'] = EMA_hist
+    df['price'][n] = dg.xgrab_live_v2(symbol)  # adding a row
+# SMA
+    SMA_hist = df['price'].rolling(30).mean()
+    df['SMA30'] = SMA_hist
+    SMA_hist = df['price'].rolling(90).mean()
+    df['SMA90'] = SMA_hist
 
     balanceUSDT = client.get_asset_balance(asset='USDT')
-    balanceBTC = client.get_asset_balance(asset='BTC')
+    balanceBNB = client.get_asset_balance(asset='BNB')
     balanceUSDT = float(balanceUSDT['free'])
-    balanceBTC = float(balanceBTC['free'])
+    balanceBNB = float(balanceBNB['free'])
 
-    balanceUSDT = balanceUSDT / df.iloc[n, 0]  # converting to BTC
+    balanceUSDT = balanceUSDT / df['price'][n]  # converting to BNB
 
-    amt_BTC = balanceBTC * 0.99
-    amt_USDT = balanceUSDT * 0.99  # it's in BTC
-
+    amt_BNB = balanceBNB * 0.99
+    amt_USDT = balanceUSDT * 0.99  # it's in BNB
+    MSG = (f"short moving average: {df['SMA30'][n]}, long moving average: {df['SMA90'][n]}")
+    psh.push(MSG)
     if not (act == 0):
         act = act - 1
-    if amt_USDT >= amt_BTC:
-        if CustomFunctions.buy_conditions_EMA_f(df, n) == True:  # buy BTC
+    if amt_USDT >= amt_BNB:
+        if CustomFunctions.buy_conditions_SMA(df, n) == True:  # buy BNB
             client.order_market_buy(symbol=symbol, quantity=round(amt_USDT, 6))
-            rt = (balanceUSDT + balanceBTC) / money_fix * 100
+            rt = (balanceUSDT + balanceBNB) / money_fix * 100
             MSG = (
-                f"BUY, price: {df.iloc[n, 0]},return: {rt} '% @:',{dt.datetime.now()}")
+                f"BUY, price: {df['price'][n]},return: {rt} '% @:',{dt.datetime.now()}")
             psh.push(MSG)
             act = 2
-            bprice = df.iloc[n, 0]
+            bprice = df['price'][n]
 
-    if amt_BTC >= amt_USDT:  # if we activate the if above, transform if to elif
+    if amt_BNB >= amt_USDT:  # if we activate the if above, transform if to elif
         # Did SMA get smaller than closing price?
-        if CustomFunctions.sell_conditions_EMA_f(df, n) == True:  # sell BTC
+        if CustomFunctions.sell_conditions_SMA(df, n) == True:  # sell BNB
             client.order_market(symbol=symbol, side='SELL',
-                                quantity=round(amt_BTC, 6))
-            rt = (balanceUSDT + balanceBTC) / money_fix * 100
+                                quantity=round(amt_BNB, 6))
+            rt = (balanceUSDT + balanceBNB) / money_fix * 100
             MSG = (
-                f"SELL, price: {df.iloc[n, 0]},return: {rt} '% @:',{dt.datetime.now()}")
+                f"SELL, price: {df['price'][n]},return: {rt} '% @:',{dt.datetime.now()}")
             psh.push(MSG)
-            if df.iloc[n, 0] < 0.99 * bprice:
+            if df['price'][n] < 0.99 * bprice:
                 act = 10
             else:
                 act = 2
 
-    df.iloc[n, 2] = amt_USDT
-    df.iloc[n, 3] = amt_BTC
+    df['amt_USDT'][n] = amt_USDT
+    df['amt_BNB'][n] = amt_BNB
 
     n += 1
     tm.sleep(w)
