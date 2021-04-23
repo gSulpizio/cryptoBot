@@ -69,7 +69,7 @@ n = len(df)
 
 MSG = (f"Initiating trading {symbol} 1h using EMA")
 psh.push(MSG)
-w=1
+
 tm.sleep(w)
 
 
