@@ -34,11 +34,11 @@ bprice = 0
 # n_prov=float(input())*24
 
 symbol = 'BNBUSDT'
-
+interval='1h'
 # initialisation:
 
 df = pd.DataFrame()
-df_init = dg.xgrab_rate(symbol)
+df_init = dg.xgrab_rate(symbol, interval)
 
 df = pd.DataFrame(np.nan, index=range(0, 500), columns=['price'])
 df_init['c'] = df_init['c'].astype(float)

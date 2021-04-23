@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt  # for charts and such
 
 client = Client(BKeys.key(), BKeys.SecretKey())
 
-def xgrab_rate(symbol):
+def xgrab_rate(symbol, interval):
 
 
 
@@ -20,7 +20,7 @@ def xgrab_rate(symbol):
 
 
 
-    interval = '1h'
+    #interval = '1h'
 
     url = root_url + '?symbol=' + symbol + '&interval=' + interval
 
@@ -34,7 +34,7 @@ def xgrab_rate(symbol):
 
     df.index = [dt.datetime.fromtimestamp(x/1000.0) for x in df.close_time]
 
-    def get_bars(symbol, interval = '1d'):
+    def get_bars(symbol, interval = interval):
        url = root_url + '?symbol=' + symbol + '&interval=' + interval
        data = json.loads(requests.get(url).text)
        df = pd.DataFrame(data)
