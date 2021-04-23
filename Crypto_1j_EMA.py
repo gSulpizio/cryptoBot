@@ -69,7 +69,7 @@ n = len(df)
 
 MSG = (f"Initiating trading {symbol} 1h using EMA")
 psh.push(MSG)
-
+w=1
 tm.sleep(w)
 
 
@@ -95,7 +95,8 @@ while True == True:
 
     amt_BNB = balanceBNB * 0.99
     amt_USDT = balanceUSDT * 0.99  # it's in BNB
-
+    MSG = (f"short moving average: {df['SMA30'][n]}, long moving average: {df['SMA90'][n]}")
+    psh.push(MSG)
     if not (act == 0):
         act = act - 1
     if amt_USDT >= amt_BNB:
