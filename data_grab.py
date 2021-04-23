@@ -20,7 +20,7 @@ def xgrab_rate(symbol):
 
 
 
-    interval = '1m'
+    interval = '1h'
 
     url = root_url + '?symbol=' + symbol + '&interval=' + interval
 
