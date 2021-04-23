@@ -35,6 +35,7 @@ bprice = 0
 
 symbol = 'BNBUSDT'
 interval='1h'
+shortSpan=15
 # initialisation:
 
 df = pd.DataFrame()
@@ -60,8 +61,8 @@ df['amt_BNB'] = np.nan
 
 # SMA:
 
-SMA_hist = df.iloc[:, 0].rolling(30).mean()
-df['SMA30'] = SMA_hist
+SMA_hist = df['price'].ewm(span=shortSpan, adjust=False).mean()
+df['EMA15'] = SMA_hist
 SMA_hist = df.iloc[:, 0].rolling(90).mean()
 df['SMA90'] = SMA_hist
 
@@ -77,12 +78,12 @@ tm.sleep(w)
 while True == True:
     top_row = pd.DataFrame(
         {'price': [np.nan], 'amt_USDT': [np.nan],
-         'amt_BNB': [np.nan], 'SMA30': [np.nan], 'SMA90': [np.nan]})
+         'amt_BNB': [np.nan], 'EMA15': [np.nan], 'SMA90': [np.nan]})
     df = pd.concat([df, top_row]).reset_index(drop=True)
     df['price'][n] = dg.xgrab_live_v2(symbol)  # adding a row
 # SMA
-    SMA_hist = df['price'].rolling(30).mean()
-    df['SMA30'] = SMA_hist
+    SMA_hist = df['price'].ewm(span=shortSpan, adjust=False).mean()
+    df['EMA15'] = SMA_hist
     SMA_hist = df['price'].rolling(90).mean()
     df['SMA90'] = SMA_hist
 
@@ -95,7 +96,7 @@ while True == True:
 
     amt_BNB = balanceBNB * 0.99
     amt_USDT = balanceUSDT * 0.99  # it's in BNB
-    MSG = (f"short moving average: {df['SMA30'][n]}, long moving average: {df['SMA90'][n]}")
+    MSG = (f"short moving average: {df['EMA15'][n]}, long moving average: {df['SMA90'][n]}")
     psh.push(MSG)
     if not (act == 0):
         act = act - 1

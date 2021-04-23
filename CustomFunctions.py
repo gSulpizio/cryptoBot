@@ -405,22 +405,22 @@ def sell_conditions_EMA_f(df, n):
         return False
 
 def buy_conditions_SMA(df, n):
-    SMA30 = df['SMA30'][n]
+    EMA15 = df['EMA15'][n]
     SMA90 = df['SMA90'][n]
-    pSMA30 = df['SMA30'][n-1]
+    pEMA15 = df['EMA15'][n-1]
     pSMA90 = df['SMA90'][n-1]
-    if SMA30>SMA90 and pSMA30<pSMA90:
+    if EMA15>SMA90 and pEMA15<pSMA90:
         return True
     else:
         return False
 
 
 def sell_conditions_SMA(df, n):
-    SMA30 = df['SMA30'][n]
+    EMA15 = df['EMA15'][n]
     SMA90 = df['SMA90'][n]
-    pSMA30 = df['SMA30'][n-1]
+    pEMA15 = df['EMA15'][n-1]
     pSMA90 = df['SMA90'][n-1]
-    if SMA30<SMA90 and pSMA30>pSMA90:
+    if EMA15<SMA90 and pEMA15>pSMA90:
         return True
     else:
         return False
