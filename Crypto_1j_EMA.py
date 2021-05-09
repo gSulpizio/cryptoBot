@@ -16,7 +16,7 @@ import Push_notification as psh
 # import pickle
 import os.path
 
-
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!IF CURRENCY IS CHANGED, ROUNDING HAS TO BE CHANGED TOO
 # orders
 
 client = Client(BKeys.key(), BKeys.SecretKey())
@@ -112,7 +112,7 @@ while True == True:
         act = act - 1
     if amt_USDT >= amt_BNB:
         if CustomFunctions.buy_conditions_SMA(df, n) == True:  # buy BNB
-            client.order_market_buy(symbol=symbol, quantity=round(amt_USDT, 6))
+            client.order_market_buy(symbol=symbol, quantity=round(amt_USDT, 4))
             rt = (balanceUSDT + balanceBNB) / money_fix * 100
             MSG = (
                 f"BUY, price: {df['price'][n]},return: {rt} '% @:',{dt.datetime.now()}"
@@ -124,7 +124,7 @@ while True == True:
     if amt_BNB >= amt_USDT:  # if we activate the if above, transform if to elif
         # Did SMA get smaller than closing price?
         if CustomFunctions.sell_conditions_SMA(df, n) == True:  # sell BNB
-            client.order_market(symbol=symbol, side="SELL", quantity=round(amt_BNB, 6))
+            client.order_market(symbol=symbol, side="SELL", quantity=round(amt_BNB, 4))
             rt = (balanceUSDT + balanceBNB) / money_fix * 100
             MSG = (
                 f"SELL, price: {df['price'][n]},return: {rt} '% @:',{dt.datetime.now()}"
