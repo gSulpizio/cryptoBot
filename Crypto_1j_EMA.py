@@ -12,11 +12,12 @@ import BinanceKeys as BKeys
 
 # import ccxt
 import Push_notification as psh
+from binance_orders import buy_order, sell_order
 
 # import pickle
 import os.path
 
-#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!IF CURRENCY IS CHANGED, ROUNDING HAS TO BE CHANGED TOO
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!              IF CURRENCY IS CHANGED, ROUNDING HAS TO BE CHANGED TOO
 rounding = 4
 # orders
 
@@ -105,15 +106,11 @@ while True == True:
 
     amt_BNB = balanceBNB * 0.99
     amt_USDT = balanceUSDT * 0.99  # it's in BNB
-    MSG = (
-        f"short moving average: {df['EMA15'][n]}, long moving average: {df['SMA20'][n]}"
-    )
-    psh.push(MSG)
     if not (act == 0):
         act = act - 1
     if amt_USDT >= amt_BNB:
         if CustomFunctions.buy_conditions_SMA(df, n) == True:  # buy BNB
-            client.order_market_buy(symbol=symbol, quantity=round(amt_USDT, rounding))
+            buy_order(symbol=symbol, quantity=round(amt_USDT, rounding))
             rt = (balanceUSDT + balanceBNB) / money_fix * 100
             MSG = (
                 f"BUY, price: {df['price'][n]},return: {rt} '% @:',{dt.datetime.now()}"
@@ -125,9 +122,7 @@ while True == True:
     if amt_BNB >= amt_USDT:  # if we activate the if above, transform if to elif
         # Did SMA get smaller than closing price?
         if CustomFunctions.sell_conditions_SMA(df, n) == True:  # sell BNB
-            client.order_market(
-                symbol=symbol, side="SELL", quantity=round(amt_BNB, rounding)
-            )
+            sell_order(symbol=symbol, quantity=round(amt_BNB, rounding))
             rt = (balanceUSDT + balanceBNB) / money_fix * 100
             MSG = (
                 f"SELL, price: {df['price'][n]},return: {rt} '% @:',{dt.datetime.now()}"
