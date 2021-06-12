@@ -16,6 +16,7 @@ def sell_order(pair, quantity):
             return
     except:
         psh.push("Sell order raised error, initiating retry")
+    status = "failed"
     while True:
         if counter < 10:
             tm.sleep(60)
@@ -41,7 +42,7 @@ def buy_order(pair, quantity):
             return
     except:
         psh.push("Buy order raised error, initiating retry")
-    status = order["status"]
+    status = "failed"
     while True:
         if counter < 10:
             tm.sleep(60)
