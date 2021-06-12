@@ -34,4 +34,4 @@ def buy_order(pair, quantity):
         elif counter == 10:
             psh.push("BUY ORDER COULD NOT BE PLACED")
         else:
-            break
+            return

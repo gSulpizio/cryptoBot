@@ -110,7 +110,7 @@ while True == True:
         act = act - 1
     if amt_USDT >= amt_BNB:
         if CustomFunctions.buy_conditions_SMA(df, n) == True:  # buy BNB
-            buy_order(symbol=symbol, quantity=round(amt_USDT, rounding))
+            buy_order(pair=symbol, quantity=round(amt_USDT, rounding))
             rt = (balanceUSDT + balanceBNB) / money_fix * 100
             MSG = (
                 f"BUY, price: {df['price'][n]},return: {rt} '% @:',{dt.datetime.now()}"
@@ -122,7 +122,7 @@ while True == True:
     if amt_BNB >= amt_USDT:  # if we activate the if above, transform if to elif
         # Did SMA get smaller than closing price?
         if CustomFunctions.sell_conditions_SMA(df, n) == True:  # sell BNB
-            sell_order(symbol=symbol, quantity=round(amt_BNB, rounding))
+            sell_order(pair=symbol, quantity=round(amt_BNB, rounding))
             rt = (balanceUSDT + balanceBNB) / money_fix * 100
             MSG = (
                 f"SELL, price: {df['price'][n]},return: {rt} '% @:',{dt.datetime.now()}"
