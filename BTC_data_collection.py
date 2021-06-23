@@ -19,7 +19,7 @@ w=60
 
 client = Client(BKeys.key(), BKeys.SecretKey())
 
-symbol = 'BTCUSDT'
+symbol = 'BTCBUSD'
 
 
 n=0
