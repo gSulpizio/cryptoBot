@@ -3,8 +3,6 @@ import time
 import pandas as pd
 import numpy as np
 
-import matplotlib.pyplot as plt
-
 
 def SMAcalc_binance(begin, days, data_for_SMA, target_column):
     SMA = 0
