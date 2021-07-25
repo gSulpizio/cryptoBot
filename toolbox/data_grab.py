@@ -7,7 +7,6 @@ import numpy as np  # numerical python, i usually need this somewhere
 import requests
 import CustomFunctions
 import time as tm
-import matplotlib.pyplot as plt  # for charts and such
 
 client = Client(BKeys.key(), BKeys.SecretKey())
 

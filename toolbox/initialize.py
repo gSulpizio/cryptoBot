@@ -6,7 +6,7 @@ import data_grab as dg
 import numpy as np
 def initialize():
     client = Client(key(), SecretKey())
-    df_init = dg.xgrab_rate(symbol, interval)
+    df_init = dg.xgrab_rate(symbol(), interval())
     df = pd.DataFrame(np.nan, index=range(0, 500), columns=["price"])
     df_init["c"] = df_init["c"].astype(float)
     for i in range(0, 500):
@@ -18,7 +18,7 @@ def initialize():
     balanceBNB = float(balanceBNB["free"])
     df["amt_BUSD"] = np.nan
     df["amt_BNB"] = np.nan
-    SMA_hist = df["price"].ewm(span=shortSpan, adjust=False).mean()
+    SMA_hist = df["price"].ewm(span=shortSpan(), adjust=False).mean()
     df["EMA15"] = SMA_hist
     SMA_hist = df.iloc[:, 0].rolling(20).mean()
     df["SMA20"] = SMA_hist
