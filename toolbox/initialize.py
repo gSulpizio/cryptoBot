@@ -5,6 +5,10 @@ from binance.client import Client
 import data_grab as dg
 import numpy as np
 def initialize():
+    '''
+    Returns dataframe with the 500 last prices and the SMA20 and EMA15
+    Takes intervals from the constants functions
+    '''
     client = Client(key(), SecretKey())
     df_init = dg.xgrab_rate(symbol(), interval())
     df = pd.DataFrame(np.nan, index=range(0, 500), columns=["price"])

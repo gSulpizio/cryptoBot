@@ -19,7 +19,7 @@ def add_row(df):
         }
     )
     df = pd.concat([df, top_row]).reset_index(drop=True)
-    df["price"][n] = dg.xgrab_live_v2(symbol())  # adding a row
+    df["price"][n] = dg.xgrab_live(symbol())  # adding a row
     # SMA
     SMA_hist = df["price"].ewm(span=shortSpan(), adjust=False).mean()
     df["EMA15"] = SMA_hist
