@@ -4,6 +4,10 @@ import numpy as np
 from constants import *
 import data_grab as dg
 def add_row(df):
+    '''
+    Adds a row to the dataframe in the last position (n-th position, n=len(df)).
+    Returns the dataframe with added row
+    '''
     n=len(df)
     top_row = pd.DataFrame(
         {
