@@ -1,3 +1,4 @@
+__all__=['key', 'SecretKey']
 def key():
     '''
     Returns public api key for binance
@@ -11,3 +12,7 @@ def SecretKey():
     '''
     b='5tHCL85UtoGwLeX13tyICx6lj2C4dBO2Klw1JkISzgHn1k3LQCi55IPcmHKF9ZiA'
     return b
+
+if __name__ == "__main__":
+    print(key())
+    print(SecretKey())

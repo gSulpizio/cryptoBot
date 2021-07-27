@@ -1,3 +1,4 @@
+__all__=['initialize']
 import pandas as pd
 from constants import *
 from BinanceKeys import *
@@ -22,7 +23,7 @@ def initialize():
     balanceBNB = float(balanceBNB["free"])
     df["amt_BUSD"] = np.nan
     df["amt_BNB"] = np.nan
-    SMA_hist = df["price"].ewm(span=shortSpan(), adjust=False).mean()
+    SMA_hist = df["price"].ewm(span=short_span(), adjust=False).mean()
     df["EMA15"] = SMA_hist
     SMA_hist = df.iloc[:, 0].rolling(20).mean()
     df["SMA20"] = SMA_hist

@@ -1,3 +1,4 @@
+#__all__=['add_row']
 from initialize import initialize
 import pandas as pd
 import numpy as np
@@ -21,10 +22,8 @@ def add_row(df):
     df = pd.concat([df, top_row]).reset_index(drop=True)
     df["price"][n] = dg.xgrab_live(symbol())  # adding a row
     # SMA
-    SMA_hist = df["price"].ewm(span=shortSpan(), adjust=False).mean()
-    df["EMA15"] = SMA_hist
-    SMA_hist = df["price"].rolling(20).mean()
-    df["SMA20"] = SMA_hist
+    df["EMA15"] = df["price"].ewm(span=short_span(), adjust=False).mean()
+    df["SMA20"] = df["price"].rolling(20).mean()
     return df
 
 if __name__ == "__main__":
