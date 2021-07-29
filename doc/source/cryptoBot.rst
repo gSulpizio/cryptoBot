@@ -28,14 +28,6 @@ cryptoBot.Crypto\_1j\_EMA module
    :undoc-members:
    :show-inheritance:
 
-cryptoBot.Push\_notification module
------------------------------------
-
-.. automodule:: cryptoBot.Push_notification
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 cryptoBot.binance\_orders module
 --------------------------------
 
@@ -44,42 +36,10 @@ cryptoBot.binance\_orders module
    :undoc-members:
    :show-inheritance:
 
-cryptoBot.buy\_order module
----------------------------
-
-.. automodule:: cryptoBot.buy_order
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-cryptoBot.buy\_signal module
-----------------------------
-
-.. automodule:: cryptoBot.buy_signal
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 cryptoBot.cryptoBot module
 --------------------------
 
 .. automodule:: cryptoBot.cryptoBot
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-cryptoBot.sell\_order module
-----------------------------
-
-.. automodule:: cryptoBot.sell_order
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-cryptoBot.sell\_signal module
------------------------------
-
-.. automodule:: cryptoBot.sell_signal
    :members:
    :undoc-members:
    :show-inheritance:

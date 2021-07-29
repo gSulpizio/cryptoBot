@@ -7,7 +7,6 @@ import pandas as pd
 import json  # for parsing what binance sends back to us
 import numpy as np  # numerical python, i usually need this somewhere
 import requests
-import CustomFunctions
 import time as tm
 
 client = Client(key(), SecretKey())

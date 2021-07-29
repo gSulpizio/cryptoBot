@@ -1,2 +1,0 @@
-def sell_order():
-    

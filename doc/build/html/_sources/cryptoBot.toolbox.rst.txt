@@ -20,10 +20,26 @@ cryptoBot.toolbox.CustomFunctions module
    :undoc-members:
    :show-inheritance:
 
+cryptoBot.toolbox.Push\_notification module
+-------------------------------------------
+
+.. automodule:: cryptoBot.toolbox.Push_notification
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 cryptoBot.toolbox.add\_row module
 ---------------------------------
 
 .. automodule:: cryptoBot.toolbox.add_row
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+cryptoBot.toolbox.binance\_buy module
+-------------------------------------
+
+.. automodule:: cryptoBot.toolbox.binance_buy
    :members:
    :undoc-members:
    :show-inheritance:

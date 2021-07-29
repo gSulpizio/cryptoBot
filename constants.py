@@ -1,7 +1,13 @@
 #__all__=['symbol', 'interval', 'rounding','shortSpan']
+def asset1():
+    '''returns the first traded asset (ex: BNB in BNBUSDT)'''
+    return "BNB"
+def asset2():
+    '''returns the second traded asset (ex: USDT in BNBUSDT)'''
+    return "BUSD"
 def symbol():
     '''returns the traded symbol (ex: BNBUSDT)'''
-    return "BNBBUSD"
+    return asset1()+asset2()
 def interval():
     '''returns the time interval'''
     return "1h"
