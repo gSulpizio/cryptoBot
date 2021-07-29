@@ -1,18 +1,23 @@
+__all__=['xgrab_live', 'xgrab_rate']
 import datetime as dt
+from constants import interval, symbol
 from binance.client import Client
-import BinanceKeys as BKeys
+from BinanceKeys import key, SecretKey
 import pandas as pd
 import json  # for parsing what binance sends back to us
 import numpy as np  # numerical python, i usually need this somewhere
 import requests
-import CustomFunctions
 import time as tm
-import matplotlib.pyplot as plt  # for charts and such
 
-client = Client(BKeys.key(), BKeys.SecretKey())
+client = Client(key(), SecretKey())
 
 
 def xgrab_rate(symbol, interval):
+    '''
+    Returns 500 last rates in a dataframe
+    param: {string} symbol - symbol of the coins (ex: BNBBUSD)
+    param: {string} interval - time interval (ex: 1h)
+    '''
 
     root_url = "https://api.binance.com/api/v1/klines"
 
@@ -68,18 +73,10 @@ def xgrab_rate(symbol, interval):
 
     return df
 
-
 def xgrab_live(symbol):
-    prices_prov = client.get_all_tickers()
-    prices = pd.DataFrame(prices_prov)
-    lin = prices.index[prices["symbol"].str.contains(symbol)]
-    lin = lin[0]
-    prices["price"] = prices["price"].astype(float)
-    p = prices.iloc[lin, 1]
-    return p
-
-
-def xgrab_live_v2(symbol):
+    '''
+    Returns the rate of the symbol
+    '''
     try:
         root_url = "https://api.binance.com/api/v1/ticker/price"
         url_1 = root_url + "?symbol=" + symbol
@@ -89,4 +86,10 @@ def xgrab_live_v2(symbol):
         return p
     except:
         tm.sleep(10 * 60)
-        xgrab_live_v2(symbol)
+        xgrab_live(symbol)
+
+if __name__=="__main__":
+    symbol='BNBBUSD'
+    interval='1h'
+    print(xgrab_rate(symbol, interval))
+    print(xgrab_live(symbol))
