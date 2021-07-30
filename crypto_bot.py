@@ -31,7 +31,8 @@ while True:
     if amt1>amt2 and sell_condition(df):
         binance_order(symbol(), amt2, "BUY")
         rtrn=round(df['price'][len(df)-1]/bought_price, 2)
-        push(f"BUY, price: {df['price'][len(df)-1]}, return: {rtrn}% @:',{datetime.now()}")
+        push(f"SELL, price: {df['price'][len(df)-1]}, return: {rtrn}% @:',{datetime.now()}")
     df["amt_BUSD"][len(df)-1] = amt2
     df["amt_BNB"][len(df)-1] = amt1
+    time.sleep(60)
  
