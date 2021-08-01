@@ -9,7 +9,9 @@ from binance_order import binance_order
 
 from datetime import datetime
 import time
-
+"""
+Runs the whole algorithm, to make the documentation comment the sleep functions and uncomment the break
+"""
 df=initialize()
 MSG = f"Initiating trading {symbol()} 1h using EMA"
 push(MSG)
@@ -19,8 +21,9 @@ bought_price=0
 
 
 while True:
+    break #uncomment for doc building
     if datetime.now().minute!=0:
-        time.sleep(60)
+        #time.sleep(60)
         continue
     df=add_row(df)
     amt1, amt2=balances(df)
@@ -34,5 +37,5 @@ while True:
         push(f"SELL, price: {df['price'][len(df)-1]}, return: {rtrn}% @:',{datetime.now()}")
     df["amt_BUSD"][len(df)-1] = amt2
     df["amt_BNB"][len(df)-1] = amt1
-    time.sleep(60)
+    #time.sleep(60)
  

@@ -5,12 +5,17 @@ import time as tm
 import BinanceKeys as BKeys
 import Push_notification as psh
 def binance_order(pair, quantity,side, timeout=10):
-    '''Sends a buy request to Binance.
-    - pair: string of trading pair (ex: 'BNBUSDT').
-    - quantity: amount of the first member of the pair to trade.
-    - side: "BUY" to buy BNB and "SELL" to sell BNB for the example
-    - timeout: if the request fails, the amount of time (in minutes) to wait before retrying 
-    '''
+    """
+    Sends a buy or sell request to Binance.
+
+    Args:
+        pair (string): string of trading pair (ex: 'BNBUSDT').
+        quantity (float): amount of the first member of the pair to trade.
+        side (string): "BUY" to buy BNB and "SELL" to sell BNB for the example.
+        timeout (int): if the request fails, the amount of time (in minutes) to wait before retrying.
+    
+    Returns: void
+    """
     client = Client(BKeys.key(), BKeys.SecretKey())
     order_quantity=round(quantity, rounding())
     try:

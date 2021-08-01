@@ -1,9 +1,13 @@
 def buy_condition(df):
-    '''
-    Checks if buying conditions are met for the SMA
-    - df: dataframe containing SMA20 and EMA15
-    Returns boolean
-    '''
+    """
+    Checks if buying conditions are met for the SMA.
+
+    Args:
+        df (dataframe): dataframe containing SMA20 and EMA15.
+        
+    Returns:
+        boolean: True means that the conditions are met, False that they are not.
+    """
     n=len(df)-1
     EMA15 = df["EMA15"][n]
     SMA20 = df["SMA20"][n]

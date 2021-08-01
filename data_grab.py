@@ -13,11 +13,14 @@ client = Client(key(), SecretKey())
 
 
 def xgrab_rate(symbol, interval):
-    '''
-    Returns 500 last rates in a dataframe
-    param: {string} symbol - symbol of the coins (ex: BNBBUSD)
-    param: {string} interval - time interval (ex: 1h)
-    '''
+    """
+    Gets 500 last rates in a dataframe.
+    Args:
+        symbol (str): symbol of the coins (ex: BNBBUSD)
+        interval (str): time interval (ex: 1h)
+    Returns:
+        dataframe: The dataframe containing the 500 last rates.
+    """
 
     root_url = "https://api.binance.com/api/v1/klines"
 
@@ -74,9 +77,15 @@ def xgrab_rate(symbol, interval):
     return df
 
 def xgrab_live(symbol):
-    '''
-    Returns the rate of the symbol
-    '''
+    """
+    gets the live rate of the symbol.
+
+    Args:
+        symbol (str): symbol of the coins (ex: BNBBUSD).
+
+    Returns:
+        float: live price of current symbol.
+    """
     try:
         root_url = "https://api.binance.com/api/v1/ticker/price"
         url_1 = root_url + "?symbol=" + symbol

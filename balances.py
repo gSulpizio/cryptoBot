@@ -2,9 +2,15 @@ from binance.client import Client
 import BinanceKeys as BKeys
 from constants import *
 def balances(df):
-    '''
-    Gets balances of both assets
-    '''
+    """
+    Gets balances of both assets.
+
+    Args:
+        df (dataframe): dataframe of prices.
+
+    Returns: 
+        amt1 (float), amt2 (float): amount of symbol1 and symbol2 owned times 0.99, in symbol2 units
+    """
     n=len(df)-1
     client = Client(BKeys.key(), BKeys.SecretKey())
     balance2 = client.get_asset_balance(asset=asset2())

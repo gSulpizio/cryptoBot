@@ -1,9 +1,13 @@
 def sell_condition(df):
-    '''
-    Checks if selling conditions are met for the SMA
-    - df: dataframe containing SMA20 and EMA15
-    Returns Boolean
-    '''
+    """
+    Checks if selling conditions are met for the SMA.
+
+    Args:
+        df (dataframe): containing SMA20 and EMA15.
+
+    Returns:
+        Boolean.
+    """
     n=len(df)-1
     EMA15 = df["EMA15"][n]
     SMA20 = df["SMA20"][n]
