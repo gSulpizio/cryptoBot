@@ -1,6 +1,4 @@
-#f = open('keys.txt',"r")
-#public = f.readline()
-#private = f.readline()
+"""Reads from keys.txt that can be generated with quick_start.py"""
 keys=open("keys.txt").read().splitlines()
 def key():
     """Returns public api key for binance

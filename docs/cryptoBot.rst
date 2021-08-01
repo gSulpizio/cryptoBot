@@ -84,6 +84,14 @@ cryptoBot.initialize module
    :undoc-members:
    :show-inheritance:
 
+cryptoBot.quick\_start module
+-----------------------------
+
+.. automodule:: cryptoBot.quick_start
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 cryptoBot.sell\_condition module
 --------------------------------
 
