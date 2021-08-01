@@ -1,0 +1,25 @@
+#f = open('keys.txt',"r")
+#public = f.readline()
+#private = f.readline()
+keys=open("keys.txt").read().splitlines()
+def key():
+    """Returns public api key for binance
+    
+    Returns:
+        string
+
+    """
+    return keys[0]
+
+def SecretKey():
+    """Returns private api key for binance
+    
+    Returns:
+        string
+
+"""
+    return keys[1]
+
+if __name__ == "__main__":
+    print(key())
+    print(SecretKey())
