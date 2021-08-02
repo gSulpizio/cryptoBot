@@ -7,8 +7,11 @@ def push(MSG):
     Returns:
         none
     """
-    notify = Notify()
-    notify.send(MSG)
+    try:
+        notify = Notify()
+        notify.send(MSG)
+    except:
+        return 0
 
 if __name__ == "__main__":
     push('test')
