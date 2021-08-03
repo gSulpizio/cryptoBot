@@ -1,6 +1,6 @@
 __all__=['xgrab_live', 'xgrab_rate']
 import datetime as dt
-from constants import interval, symbol
+from parameters import interval, symbol
 from binance.client import Client
 from BinanceKeys import key, secretKey
 import pandas as pd

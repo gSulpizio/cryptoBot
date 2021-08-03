@@ -52,10 +52,10 @@ cryptoBot.buy\_condition module
    :undoc-members:
    :show-inheritance:
 
-cryptoBot.constants module
+cryptoBot.parameters module
 --------------------------
 
-.. automodule:: cryptoBot.constants
+.. automodule:: cryptoBot.parameters
    :members:
    :undoc-members:
    :show-inheritance:

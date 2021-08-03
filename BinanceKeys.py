@@ -1,5 +1,12 @@
-"""Reads from keys.txt that can be generated with quick_start.py"""
-keys=open("settings/keys.txt").read().splitlines()
+"""Reads from keys.json that can be generated with quick_start.py"""
+import json
+try:
+    f=open('settings/keys.json')
+    keys=json.load(f)
+    f.close()
+except: 
+    keys={'public':'', 'secret':''}
+
 def key():
     """Returns public api key for binance
     
@@ -7,7 +14,7 @@ def key():
         string
 
     """
-    return keys[0]
+    return keys['public']
 
 def secretKey():
     """Returns private api key for binance
@@ -16,7 +23,7 @@ def secretKey():
         string
 
 """
-    return keys[1]
+    return keys['secret']
 
 if __name__ == "__main__":
     print(key())

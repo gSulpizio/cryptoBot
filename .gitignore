@@ -2,3 +2,8 @@
 /.blackbox/pubring.kbx~
 /.blackbox/secring.gpg
 settings/keys.txt
+settings/keys.json
+settings/parameters.json
+keys.txt
+parameters.json
+keys.json

@@ -2,7 +2,7 @@
 from initialize import initialize
 import pandas as pd
 import numpy as np
-from constants import *
+from parameters import *
 import data_grab as dg
 def add_row(df):
     """

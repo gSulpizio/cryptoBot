@@ -1,6 +1,6 @@
 __all__=['initialize']
 import pandas as pd
-from constants import *
+from parameters import *
 from BinanceKeys import *
 from binance.client import Client
 import data_grab as dg
@@ -8,7 +8,7 @@ import numpy as np
 def initialize():
     """
     Initializes the dataframe with the 500 last intervals.
-    Takes intervals from the constants functions.
+    Takes intervals from the parameters functions.
 
     Args:
         none.

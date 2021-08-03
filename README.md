@@ -12,7 +12,7 @@ In order to get notifications when trades are executed, it is possible to set up
 
 ## Customization guide
 
-To customize simple things such as the interval or the traded pair, the [constants.py](./constants.py) file can be modified. 
+To customize simple things such as the interval or the traded pair, the [parameters.py](./parameters.py) file can be modified. 
 
 ##### Modifying the trading pair
 

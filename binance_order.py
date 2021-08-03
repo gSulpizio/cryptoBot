@@ -1,5 +1,5 @@
 from binance.client import Client
-from constants import rounding
+from parameters import rounding
 import datetime as dt
 import time as tm
 import BinanceKeys as BKeys

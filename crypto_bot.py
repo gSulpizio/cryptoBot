@@ -1,4 +1,4 @@
-from constants import *
+from parameters import *
 from initialize import initialize
 from Push_notification import push
 from add_row import add_row

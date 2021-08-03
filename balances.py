@@ -1,6 +1,6 @@
 from binance.client import Client
 import BinanceKeys as BKeys
-from constants import *
+from parameters import *
 def balances(df):
     """
     Gets balances of both assets.
