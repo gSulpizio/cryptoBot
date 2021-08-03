@@ -52,14 +52,6 @@ cryptoBot.buy\_condition module
    :undoc-members:
    :show-inheritance:
 
-cryptoBot.parameters module
---------------------------
-
-.. automodule:: cryptoBot.parameters
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 cryptoBot.crypto\_bot module
 ----------------------------
 
@@ -84,10 +76,10 @@ cryptoBot.initialize module
    :undoc-members:
    :show-inheritance:
 
-cryptoBot.quick\_start module
------------------------------
+cryptoBot.parameters module
+---------------------------
 
-.. automodule:: cryptoBot.quick_start
+.. automodule:: cryptoBot.parameters
    :members:
    :undoc-members:
    :show-inheritance:

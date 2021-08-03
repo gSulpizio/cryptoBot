@@ -23,12 +23,12 @@ def initialize():
     for i in range(0, 500):
         df.iloc[i, 0] = df_init.iloc[i, 4]
     df = df.sort_index(axis=0, ascending=True)
-    balanceBUSD = client.get_asset_balance(asset="BUSD")
-    balanceBNB = client.get_asset_balance(asset="BNB")
-    balanceBUSD = float(balanceBUSD["free"])
-    balanceBNB = float(balanceBNB["free"])
-    df["amt_BUSD"] = np.nan
-    df["amt_BNB"] = np.nan
+    balance2 = client.get_asset_balance(asset=asset2())
+    balance1 = client.get_asset_balance(asset=asset1())
+    balance2 = float(balance2["free"])
+    balance1 = float(balance1["free"])
+    df["amt_2"] = np.nan
+    df["amt_1"] = np.nan
     SMA_hist = df["price"].ewm(span=short_span(), adjust=False).mean()
     df["EMA15"] = SMA_hist
     SMA_hist = df.iloc[:, 0].rolling(20).mean()
