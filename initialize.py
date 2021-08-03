@@ -16,7 +16,7 @@ def initialize():
     Returns
         dataframe: 500 last prices and the SMA20 and EMA15.
     """
-    client = Client(key(), SecretKey())
+    client = Client(key(), secretKey())
     df_init = dg.xgrab_rate(symbol(), interval())
     df = pd.DataFrame(np.nan, index=range(0, 500), columns=["price"])
     df_init["c"] = df_init["c"].astype(float)

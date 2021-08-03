@@ -12,7 +12,7 @@ def balances(df):
         amt1 (float), amt2 (float): amount of symbol1 and symbol2 owned times 0.99, in symbol2 units
     """
     n=len(df)-1
-    client = Client(BKeys.key(), BKeys.SecretKey())
+    client = Client(BKeys.key(), BKeys.secretKey())
     balance2 = client.get_asset_balance(asset=asset2())
     balance1 = client.get_asset_balance(asset=asset1())
     balance2 = float(balance2["free"])

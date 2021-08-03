@@ -16,7 +16,7 @@ def binance_order(pair, quantity,side, timeout=10):
     
     Returns: void
     """
-    client = Client(BKeys.key(), BKeys.SecretKey())
+    client = Client(BKeys.key(), BKeys.secretKey())
     order_quantity=round(quantity, rounding())
     try:
         order = client.order_market(symbol=pair, quantity=order_quantity, side=side)

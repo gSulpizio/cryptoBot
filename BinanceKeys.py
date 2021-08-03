@@ -1,5 +1,5 @@
 """Reads from keys.txt that can be generated with quick_start.py"""
-keys=open("keys.txt").read().splitlines()
+keys=open("settings/keys.txt").read().splitlines()
 def key():
     """Returns public api key for binance
     
@@ -9,7 +9,7 @@ def key():
     """
     return keys[0]
 
-def SecretKey():
+def secretKey():
     """Returns private api key for binance
     
     Returns:
@@ -20,4 +20,4 @@ def SecretKey():
 
 if __name__ == "__main__":
     print(key())
-    print(SecretKey())
+    print(secretKey())

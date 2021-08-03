@@ -2,14 +2,14 @@ __all__=['xgrab_live', 'xgrab_rate']
 import datetime as dt
 from constants import interval, symbol
 from binance.client import Client
-from BinanceKeys import key, SecretKey
+from BinanceKeys import key, secretKey
 import pandas as pd
 import json  # for parsing what binance sends back to us
 import numpy as np  # numerical python, i usually need this somewhere
 import requests
 import time as tm
 
-client = Client(key(), SecretKey())
+client = Client(key(), secretKey())
 
 
 def xgrab_rate(symbol, interval):
