@@ -7,6 +7,7 @@ import pandas as pd
 import json  # for parsing what binance sends back to us
 import numpy as np  # numerical python, i usually need this somewhere
 import requests
+import traceback
 import time as tm
 
 client = Client(key(), secretKey())
@@ -94,6 +95,7 @@ def xgrab_live(symbol):
         p = float(price["price"])
         return p
     except:
+        traceback.print_exc()
         tm.sleep(10 * 60)
         xgrab_live(symbol)
 

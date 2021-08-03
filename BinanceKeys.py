@@ -1,10 +1,12 @@
 """Reads from keys.json that can be generated with quick_start.py"""
 import json
+import traceback
 try:
     f=open('settings/keys.json')
     keys=json.load(f)
     f.close()
 except: 
+    traceback.print_exc()
     keys={'public':'', 'secret':''}
 
 def key():

@@ -1,4 +1,5 @@
 from notify_run import Notify
+import traceback
 
 
 def push(MSG):
@@ -11,6 +12,7 @@ def push(MSG):
         notify = Notify()
         notify.send(MSG)
     except:
+        traceback.print_exc()
         return 0
 
 if __name__ == "__main__":

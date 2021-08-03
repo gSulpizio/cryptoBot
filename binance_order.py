@@ -4,6 +4,8 @@ import datetime as dt
 import time as tm
 import BinanceKeys as BKeys
 import Push_notification as psh
+import traceback
+
 def binance_order(pair, quantity,side, timeout=10):
     """
     Sends a buy or sell request to Binance.
@@ -24,6 +26,7 @@ def binance_order(pair, quantity,side, timeout=10):
         if status == "FILLED":
             return
     except: 
+        traceback.print_exc()
         tm.sleep(timeout*60)
         order = client.order_market(symbol=pair, quantity=order_quantity, side=side)
         status = order["status"]
