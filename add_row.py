@@ -20,15 +20,15 @@ def add_row(df):
             "price": [np.nan],
             "amt_BUSD": [np.nan],
             "amt_BNB": [np.nan],
-            "EMA15": [np.nan],
-            "SMA20": [np.nan],
+            "short_avg": [np.nan],
+            "long_avg": [np.nan],
         }
     )
     df = pd.concat([df, top_row]).reset_index(drop=True)
     df["price"][n] = dg.xgrab_live(symbol())  # adding a row
     # SMA
-    df["EMA15"] = df["price"].ewm(span=short_span(), adjust=False).mean()
-    df["SMA20"] = df["price"].rolling(20).mean()
+    df["short_avg"] = df["price"].ewm(span=short_span(), adjust=False).mean()
+    df["long_avg"] = df["price"].rolling(20).mean()
     return df
 
 if __name__ == "__main__":

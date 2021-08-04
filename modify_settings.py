@@ -31,13 +31,11 @@ def modify_parameters(constant_to_modify):
     f=open('settings/parameters.json')
     parameters=json.load(f)
     f.close()
-
     parameters[constant_to_modify]=input('Please input a new value for '+constant_to_modify+':\n')
     if constant_to_modify=='asset1' or constant_to_modify=='asset2':
         parameters[constant_to_modify]=parameters[constant_to_modify].upper()
         client = Client(key(), secretKey())
         rounding=int((-log10(float(client.get_symbol_info(parameters['asset1']+parameters['asset2'])['filters'][2]['stepSize']))))
-        print(rounding)
         parameters['rounding']=rounding
         print('rounding changed')
     with open('settings/parameters.json', 'w') as f:
@@ -53,11 +51,9 @@ while True:
         start_keys()
     elif category=='2':
         while True:
-
             print_parameters()
-            parameter_dict={'1':'asset1', '2':'asset2','3':'interval','4':'short_span','5':'long_span'}
-            parameter_to_change=input('Please indicate which constant you want to modify by entering its number:\n1. asset1, \n2. asset2, \n3. interval, \n4. short_span, \n5. long_span\n Enter 00 to go back or 0 to exit\n')
-    
+            parameter_dict={'1':'asset1', '2':'asset2','3':'interval','4':'short_span','5':'long_span', '6':'database'}
+            parameter_to_change=input('Please indicate which constant you want to modify by entering its number:\n1. asset1, \n2. asset2, \n3. interval, \n4. short_span, \n5. long_span\n6. database\n Enter 00 to go back or 0 to exit\n')
             if parameter_to_change=='00':
                 break
             if parameter_to_change =='0':
