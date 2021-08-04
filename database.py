@@ -31,6 +31,7 @@ def add_row_to_db(price,long,short, money, action):
     con.close()
 
 def check_table():
+    """Print table with settings from ../parameters.py"""
     query=f"SELECT * FROM {symbol()} ORDER BY timestamp"
     con = sqlite3.connect('../crypto.db')
     cur = con.cursor()
