@@ -7,6 +7,7 @@ from sell_condition import sell_condition
 from buy_condition import buy_condition
 from binance_order import binance_order
 from database import create, add_row_to_db
+import traceback
 
 from datetime import datetime
 import time
@@ -46,6 +47,9 @@ while True:
     if(database()):
         price=df['price'][len(df)-1]
         money=(amt2+amt1)*price
-        add_row_to_db(price, df['long_avg'][len(df)-1], df['short_avg'][len(df)-1], money, action)
+        try:
+            add_row_to_db(price, df['long_avg'][len(df)-1], df['short_avg'][len(df)-1], money, action)
+        except:
+            traceback.print_exc()
     time.sleep(round(interval_seconds()*0.5,0))
  
