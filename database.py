@@ -26,7 +26,7 @@ def add_row_to_db(price,long,short, money, action):
     now=datetime.now()
     timestamp = datetime.timestamp(now)
     query=f"INSERT INTO {symbol()} VALUES (?,?,?,?,?,?)"
-    cur.execute(query,(timestamp ,price, long, short, money, action))
+    cur.execute(query,(timestamp ,price, short, long, money, action))
     con.commit()
     con.close()
 
