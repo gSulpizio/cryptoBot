@@ -52,5 +52,5 @@ while True:
             add_row_to_db(price=price, long=df['long_avg'][len(df)-1], short=df['short_avg'][len(df)-1], money=money, action=action)
         except:
             traceback.print_exc()
-    time.sleep(math.floor(interval_seconds()*0.5,0))
+    time.sleep(math.floor(interval_seconds()*0.5))
  
