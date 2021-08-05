@@ -8,6 +8,7 @@ from buy_condition import buy_condition
 from binance_order import binance_order
 from database import create, add_row_to_db
 import traceback
+import math
 
 from datetime import datetime
 import time
@@ -51,5 +52,5 @@ while True:
             add_row_to_db(price=price, long=df['long_avg'][len(df)-1], short=df['short_avg'][len(df)-1], money=money, action=action)
         except:
             traceback.print_exc()
-    time.sleep(round(interval_seconds()*0.5,0))
+    time.sleep(math.floor(interval_seconds()*0.5,0))
  
