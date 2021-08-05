@@ -48,7 +48,7 @@ while True:
         price=df['price'][len(df)-1]
         money=(amt2+amt1)*price
         try:
-            add_row_to_db(price, df['long_avg'][len(df)-1], df['short_avg'][len(df)-1], money, action)
+            add_row_to_db(price=price, long=df['long_avg'][len(df)-1], short=df['short_avg'][len(df)-1], money=money, action=action)
         except:
             traceback.print_exc()
     time.sleep(round(interval_seconds()*0.5,0))

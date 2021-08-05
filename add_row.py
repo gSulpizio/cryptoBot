@@ -28,7 +28,7 @@ def add_row(df):
     df["price"][n] = dg.xgrab_live(symbol())  # adding a row
     # SMA
     df["short_avg"] = df["price"].ewm(span=short_span(), adjust=False).mean()
-    df["long_avg"] = df["price"].rolling(20).mean()
+    df["long_avg"] = df["price"].rolling(long_span()).mean()
     return df
 
 if __name__ == "__main__":
