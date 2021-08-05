@@ -3,17 +3,17 @@ def buy_condition(df):
     Checks if buying conditions are met for the SMA.
 
     Args:
-        df (dataframe): dataframe containing SMA20 and EMA15.
+        df (dataframe): dataframe containing long_avg and short_avg.
         
     Returns:
         boolean: True means that the conditions are met, False that they are not.
     """
     n=len(df)-1
-    EMA15 = df["EMA15"][n]
-    SMA20 = df["SMA20"][n]
-    pEMA15 = df["EMA15"][n - 1]
-    pSMA20 = df["SMA20"][n - 1]
-    if EMA15 > SMA20 and pEMA15 < pSMA20:
+    short_avg = df["short_avg"][n]
+    long_avg = df["long_avg"][n]
+    pshort_avg = df["short_avg"][n - 1]
+    plong_avg = df["long_avg"][n - 1]
+    if short_avg > long_avg and pshort_avg < plong_avg:
         return True
     else:
         return False

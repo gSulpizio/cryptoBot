@@ -63,6 +63,13 @@ def long_span():
         string
 """
     return int(parameters['long_span'])
+def database():
+    """returns a boolean to indicate if a database should be used
+    
+    Returns:
+        boolean
+"""
+    return json.loads(parameters['database'].lower())
 
 if __name__ == "__main__":
     print(symbol())
@@ -72,4 +79,5 @@ if __name__ == "__main__":
     print(interval_seconds())
     print(short_span())
     print(long_span())
+    print(database())
 

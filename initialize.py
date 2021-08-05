@@ -14,7 +14,7 @@ def initialize():
         none.
         
     Returns
-        dataframe: 500 last prices and the SMA20 and EMA15.
+        dataframe: 500 last prices and the long_avg and short_avg.
     """
     client = Client(key(), secretKey())
     df_init = dg.xgrab_rate(symbol(), interval())
@@ -30,9 +30,9 @@ def initialize():
     df["amt_2"] = np.nan
     df["amt_1"] = np.nan
     SMA_hist = df["price"].ewm(span=short_span(), adjust=False).mean()
-    df["EMA15"] = SMA_hist
+    df["short_avg"] = SMA_hist
     SMA_hist = df.iloc[:, 0].rolling(20).mean()
-    df["SMA20"] = SMA_hist
+    df["long_avg"] = SMA_hist
     return df
 
 if __name__=="__main__":

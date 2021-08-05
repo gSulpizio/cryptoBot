@@ -31,7 +31,8 @@ def start_parameters():
     rounding=int((-log10(float(client.get_symbol_info(symbol1+symbol2)['filters'][2]['stepSize']))))
     short_span=input('Please enter (in interval units) the short exponential moving average window:\n')
     long_span=input('Please enter (in interval units) the long simple moving average window\n')
-    parameters={'asset1':symbol1, 'asset2':symbol2,'interval':interval, 'short_span':short_span,'long_span':long_span, 'rounding':rounding}
+    database=input('Please choose if you want to record the price, the averages, the available balance and any action in a database (enter True or False)\n')
+    parameters={'asset1':symbol1, 'asset2':symbol2,'interval':interval, 'short_span':short_span,'long_span':long_span, 'rounding':rounding, 'database':database}
     with open('settings/parameters.json', 'w+') as f:
         json.dump(parameters,f)
     print("Done!")
