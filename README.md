@@ -1,6 +1,6 @@
 # cryptoBot
 
-Simple bot taking a long SMA and a short EMA to buy and sell any crypto currency using the binance API. 
+Simple bot taking a long SMA and a short EMA to buy and sell any crypto currency using the binance API. Please keep in mind that this is a hobby project, monitor the transactions made by the bot, don't risk too much money and tell me if you find bugs!
 
 
 ![demo chart](./images/priceChart1.png)
