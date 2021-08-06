@@ -7,3 +7,9 @@ settings/parameters.json
 keys.txt
 parameters.json
 keys.json
+.vscode
+.blackbox
+build
+dist
+docs
+html
