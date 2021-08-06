@@ -39,7 +39,7 @@ while True:
         action='BUY'
         bought_price=df['price'][len(df)-1]
     if amt1>amt2 and sell_condition(df):
-        binance_order(symbol(), amt2, "SELL")
+        binance_order(symbol(), amt1, "SELL")
         rtrn=round(df['price'][len(df)-1]/bought_price, 2)
         push(f"SELL, price: {df['price'][len(df)-1]}, return: {rtrn}% @:',{datetime.now()}")
         action='SELL'
