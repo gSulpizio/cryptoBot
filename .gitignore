@@ -7,3 +7,6 @@ settings/parameters.json
 keys.txt
 parameters.json
 keys.json
+__pycache__/
+.vscode/
+.blackbox/
