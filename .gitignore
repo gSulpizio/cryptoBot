@@ -10,3 +10,4 @@ keys.json
 __pycache__/
 .vscode/
 .blackbox/
+__pycache__
