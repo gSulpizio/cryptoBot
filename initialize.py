@@ -31,7 +31,7 @@ def initialize():
     df["amt_1"] = np.nan
     SMA_hist = df["price"].ewm(span=short_span(), adjust=False).mean()
     df["short_avg"] = SMA_hist
-    SMA_hist = df.iloc[:, 0].rolling(20).mean()
+    SMA_hist = df.iloc[:, 0].rolling(long_span()).mean()
     df["long_avg"] = SMA_hist
     return df
 
