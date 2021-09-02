@@ -1,10 +1,13 @@
-__all__=['initialize']
+# pylint: disable=wildcard-import
 import pandas as pd
-from parameters import *
-from BinanceKeys import *
 from binance.client import Client
-import data_grab as dg
 import numpy as np
+from parameters import asset1, asset2, short_span, long_span, symbol, interval
+from BinanceKeys import key, secretKey
+import data_grab as dg
+
+
+
 def initialize():
     """
     Initializes the dataframe with the 500 last intervals.
@@ -12,7 +15,7 @@ def initialize():
 
     Args:
         none.
-        
+
     Returns
         dataframe: 500 last prices and the long_avg and short_avg.
     """
@@ -35,5 +38,6 @@ def initialize():
     df["long_avg"] = SMA_hist
     return df
 
-if __name__=="__main__":
+
+if __name__ == "__main__":
     print(initialize())

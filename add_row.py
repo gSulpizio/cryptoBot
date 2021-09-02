@@ -1,20 +1,21 @@
-#__all__=['add_row']
 from initialize import initialize
 import pandas as pd
 import numpy as np
 from parameters import *
 import data_grab as dg
+
+
 def add_row(df):
     """
     Adds a row to the dataframe in the last position (n-th position, n=len(df)).
-    
+
     Args:
         df (dataframe): dataframe of prices until now.
 
     Returns: 
         df (dataframe): dataframe of prices until now plus live price in last position.
     """
-    n=len(df)
+    n = len(df)
     top_row = pd.DataFrame(
         {
             "price": [np.nan],
@@ -31,6 +32,7 @@ def add_row(df):
     df["long_avg"] = df["price"].rolling(long_span()).mean()
     return df
 
+
 if __name__ == "__main__":
-    df=initialize()
+    df = initialize()
     print(add_row(df))
